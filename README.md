@@ -1,31 +1,6 @@
 # WSI Segmentation using Deep Convolutional Neural Networks
 This repository contains the source code of our paper [Learning to Segment Breast Biopsy Whole Slide Images](https://arxiv.org/pdf/1709.02554.pdf)
 
-## Dataset
-Please keep your dataset in data folder. In our experiments, we followed the following structure
-
--- data
-
----- mel
-
----- train.txt
-
----- val.txt
-
------- trainrgb
-
------- trainannot
-
------- testrgb
-
------- testannot
-
-The text files (train.txt and val.txt) contains the names of training and validation files. Each of these files stores the image file location in the following format
-```
-/trainrgb/<image_file1>.png,/trainrgb/<image_file1>.png
-/trainrgb/<image_file2>.png,/trainrgb/<image_file2>.png
-```
-
 ## Training Semantic Segmentation Model
 You can train you model by executing the following command:
   ```
