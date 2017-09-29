@@ -5,12 +5,19 @@ This repository contains the source code of our paper [Learning to Segment Breas
 Please keep your dataset in data folder. In our experiments, we followed the following structure
 
 -- data
+
 ---- mel
+
 ---- train.txt
+
 ---- val.txt
+
 ------ trainrgb
+
 ------ trainannot
+
 ------ testrgb
+
 ------ testannot
 
 The text files (train.txt and val.txt) contains the names of training and validation files. Each of these files stores the image file location in the following format
