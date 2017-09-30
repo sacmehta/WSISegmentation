@@ -51,8 +51,8 @@ local function test(epoch, dataset)
     lblImg[lblImg:eq(0)] = 1
     lblImg[lblImg:gt(opt.classes)] = 1
 
-    local start_dim = 64
-        local end_dim = 256
+    local start_dim = opt.cropStart --64
+        local end_dim = opt.cropEnd --256
        lblImg = lblImg:narrow(2, start_dim, end_dim)
         lblImg = lblImg:narrow(3, start_dim, end_dim)
     
