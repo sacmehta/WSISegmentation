@@ -119,8 +119,8 @@ local function train(epoch, dataset)
         lblImg[lblImg:eq(0)] = 1
         lblImg[lblImg:gt(opt.classes)] = 1 -- in pascal dataset we have labels with value 255. Map such labels to 1 (background class)
 
-	local start_dim = 64
-	local end_dim = 256
+	local start_dim = opt.cropStart --64
+	local end_dim = opt.cropEnd --256
         lblImg = lblImg:narrow(2, start_dim, end_dim)
 	lblImg = lblImg:narrow(3, start_dim, end_dim)
 
