@@ -69,18 +69,6 @@ local function train(epoch, dataset)
   --set the model to training state
   model:training()
   
-  --compute the size of training data
---  if epoch < 10 then
---  	trainingSize = 10000 --table.getn(dataset.trainIm) 
---  elseif epoch >=10 and epoch < 20 then
---	trainingSize = 20000
---  elseif epoch >=20 and epoch < 30 then
---	trainingSize = 30000
---  else
-	trainingSize = table.getn(dataset.trainIm)
---  end
-  
-  
   -- decay the learning rate after x epochs by d
   if epoch % opt.de == 0 then
     optimState.learningRate = optimState.learningRate/opt.d
@@ -107,13 +95,16 @@ local function train(epoch, dataset)
       for i = t, math.min(t+opt.batchSize-1, trainingSize) do
         -- load new sample
         local rgbImg1 = image.load(dataset.trainIm[shuffle[i]]):float()
+				
+	-- We learn the mean and STD using Batch Normalization.
+	-- If you want to use fixed mean and std, uncomment the following lines and change the mean (0.5) and std (1) values
 --        rgbImg1[1]:add(-0.5)
 --        rgbImg1[2]:add(-0.5)
 --        rgbImg1[3]:add(-0.5)
 
-        --rgbImg1[1]:div(dataset.std1[1])
-        --rgbImg1[2]:div(dataset.std1[2])
-        --rgbImg1[3]:div(dataset.std1[3])
+        --rgbImg1[1]:div(1)
+        --rgbImg1[2]:div(1)
+        --rgbImg1[3]:div(1)
         --scaling is not required for melanoma
         --rgbImg1 = image.scale(rgbImg1, opt.imWidth, opt.imHeight)
         
@@ -124,20 +115,13 @@ local function train(epoch, dataset)
         --rgbImg2 = image.scale(rgbImg2, opt.imWidth, opt.imHeight)
 
         local lblImg = image.load(dataset.trainlbl[shuffle[i]], 1, 'byte'):float()
-        --lblImg = image.scale(lblImg, opt.imWidth, opt.imHeight,  'simple')
         lblImg:add(dataset.labelAddVal)
         lblImg[lblImg:eq(0)] = 1
---        lblImg[lblImg:eq(3)] = 2
---        lblImg[lblImg:eq(4)] = 3
---        lblImg[lblImg:eq(5)] = 3
---        lblImg[lblImg:eq(7)] = 3
---        lblImg[lblImg:eq(6)] = 4
---        lblImg[lblImg:eq(8)] = 5
         lblImg[lblImg:gt(opt.classes)] = 1 -- in pascal dataset we have labels with value 255. Map such labels to 1 (background class)
 
 	local start_dim = 64
 	local end_dim = 256
-       lblImg = lblImg:narrow(2, start_dim, end_dim)
+        lblImg = lblImg:narrow(2, start_dim, end_dim)
 	lblImg = lblImg:narrow(3, start_dim, end_dim)
 
 
