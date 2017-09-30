@@ -32,28 +32,23 @@ local function test(epoch, dataset)
     local rgbImg = image.load(dataset.valIm[i]):float()
     --rgbImg = image.scale(rgbImg, opt.imWidth, opt.imHeight)
     
+    -- We learn the mean and STD using Batch Normalization.
+	  -- If you want to use fixed mean and std, uncomment the following lines and change the mean (0.5) and std (1) values
+
+    
     --rgbImg[1]:add(-0.5)
     --rgbImg[2]:add(-0.5)
     --rgbImg[3]:add(-0.5)
 
-    --rgbImg[1]:div(dataset.std1[1])
-    --rgbImg[2]:div(dataset.std1[2])
-    --rgbImg[3]:div(dataset.std1[3])
+    --rgbImg[1]:div(1)
+    --rgbImg[2]:div(1)
+    --rgbImg[3]:div(1)
     
-
-    --rgbImg1[1]:div(dataset.std2[1])
-    --rgbImg1[2]:div(dataset.std2[2])
     
     local lblImg = image.load(dataset.vallbl[i], 1, 'byte'):float()
     --lblImg = image.scale(lblImg, opt.imWidth, opt.imHeight,  'simple')
     lblImg:add(dataset.labelAddVal)
     lblImg[lblImg:eq(0)] = 1
---    lblImg[lblImg:eq(3)] = 2
---    lblImg[lblImg:eq(4)] = 3
---    lblImg[lblImg:eq(5)] = 3
---    lblImg[lblImg:eq(7)] = 3
---    lblImg[lblImg:eq(6)] = 4
---    lblImg[lblImg:eq(8)] = 5
     lblImg[lblImg:gt(opt.classes)] = 1
 
     local start_dim = 64
