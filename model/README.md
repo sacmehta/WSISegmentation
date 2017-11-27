@@ -9,3 +9,5 @@ Please download the ResNet-18 pretrained on the ImageNet dataset from the below 
 ```
 https://github.com/facebook/fb.resnet.torch/tree/master/pretrained
 ```
+## Implementation Note
+Unlike existing methods, we do not normalize our training images with a fixed mean and standard deviation values. Instead, we learn it on-the-fly.
