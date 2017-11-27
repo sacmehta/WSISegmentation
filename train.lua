@@ -50,13 +50,15 @@ end
 
 -- tensors to store the batch data
 local inputsTr = torch.Tensor(opt.batchSize, 3, opt.imHeight, opt.imWidth)
-local inputsTr1 = torch.Tensor(opt.batchSize, 2, opt.imHeight, opt.imWidth)
+--local inputsTr1 = torch.Tensor(opt.batchSize, 2, opt.imHeight, opt.imWidth)
 local targetsTr = torch.Tensor(opt.batchSize, opt.imHeight-128, opt.imWidth-128)
 
 inputsTr = inputsTr:cuda()
 targetsTr = targetsTr:cuda()
-inputsTr1 = inputsTr1:cuda()
+--inputsTr1 = inputsTr1:cuda()
 --- ------
+
+
 -- Fucntion to train the network
 -- @function [parent=#train] train
 -- @param #number epoch Epoch number
