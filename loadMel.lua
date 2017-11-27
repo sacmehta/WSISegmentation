@@ -98,10 +98,6 @@ end
 local normHist = histClasses / histClasses:sum()
 local classWeights = torch.Tensor(classes):fill(1)
 for i = 1, classes do
-   -- Ignore unlabeled and egoVehicle
-   if i == 1 then
-      classWeights[i] = 0
-   end
    if histClasses[i] < 1 then
       print("Class " .. tostring(i) .. " not found")
       classWeights[i] = 0
