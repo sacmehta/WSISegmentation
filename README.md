@@ -27,3 +27,5 @@ The above command will run the code with an initial learning rate of 0.0001.
 ## License
 This software is released under a creative commons license which allows for personal and research use only. For a commercial license please contact the authors. You can view a license summary [here](http://creativecommons.org/licenses/by-nc/4.0/).
 
+## NOTE
+The source code is adapted from [MSRSegNet](https://github.com/sacmehta/MSRSegNet)
